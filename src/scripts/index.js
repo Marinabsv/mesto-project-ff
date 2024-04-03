@@ -1,4 +1,4 @@
-// @todo: Темплейт карточки
+import {initialCards} from './scripts/cards';
 
 const listCards = document.querySelector(".places__list");
 const cardTemplate = document.querySelector("#card-template").content;
