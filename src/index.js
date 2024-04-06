@@ -1,6 +1,7 @@
-import {openPopup,closePopup,closePopupOverlay,closePopupEsc} from './modal'
+import {openPopup,closePopup,closePopupOverlay} from './modal'
 import "./pages/index.css";
-import {initialCards,createCard,like,deleteCard} from "./scripts/cards";
+import {initialCards} from "./scripts/cards";
+import {createCard,like,deleteCard} from "./card";
 
 const listCards = document.querySelector(".places__list");
 const popupEditButton = document.querySelector(".profile__edit-button");
@@ -25,13 +26,13 @@ const profileTitle=document.querySelector('.profile__title');
 const profileDescription=document.querySelector('.profile__description');
 
 
-// @todo: Вывести карточки на страницу РАБОЧАЯ ↓
+// @todo: Вывести карточки на страницу 
 
 initialCards.forEach((data) => {
   listCards.append(createCard(data, deleteCard,like,openImage));
 });
 
-///Добавление карточки-----------------------
+///Добавление карточки-
 
 formPlace.addEventListener('submit',function (evt){
   evt.preventDefault(); 
@@ -41,46 +42,40 @@ formPlace.addEventListener('submit',function (evt){
   }
   listCards.prepend(createCard(newCardObj,deleteCard,like,openImage));
   formPlace.reset();
-  closePopup(submitNewCardButton,addPopup);
+  closePopup(addPopup);
 });
 
-///Редактирование информации-----------------------
+///Редактирование информации-
+  nameInput.value=profileTitle.textContent;
+  jobInput.value=profileDescription.textContent;
 
-function handleFormSubmit(evt) {
+  function handleFormSubmit(evt) {
     evt.preventDefault(); 
-     profileTitle.textContent=nameInput.value;
+    profileTitle.textContent=nameInput.value;
     profileDescription.textContent=jobInput.value;
-    closePopup(submitEditCardButton,editPopup);
+    closePopup(editPopup);
 }
 
 formElement.addEventListener('submit', handleFormSubmit);
 
-///Открытие картинки----------
+///Открытие картинки-
 
 function openImage(imgSrc,captionText){
   popupImage.src=imgSrc;
   popupImage.alt=captionText;
   popupCaption.textContent=captionText;
-  popupOpenImage.classList.add('popup_is-opened','popup_is-animated');
+  openPopup(popupOpenImage);
 }
 
-///ВЫзов функций -------------------------
-
-openPopup(popupEditButton,editPopup);
-openPopup(popupAddButton,addPopup);
-closePopup(popupCloseButtonEdit,editPopup);
-closePopup(popupCloseButtonAdd,addPopup);
-closePopupOverlay(editPopup);
-closePopupOverlay(addPopup);
-closePopupEsc(editPopup);
-closePopupEsc(addPopup);
-closePopupEsc(popupOpenImage);
-closePopup(popupCloseButtonImage,popupOpenImage);
-closePopupOverlay(popupOpenImage);
+///ВЫзов функций ---
 
 
 
-  
-
-  
-
+popupEditButton.addEventListener('click',() => openPopup(editPopup));
+popupAddButton.addEventListener('click',() => openPopup(addPopup));
+popupCloseButtonEdit.addEventListener('click',() => closePopup(editPopup));
+popupCloseButtonAdd.addEventListener('click',() => closePopup(addPopup));
+popupCloseButtonImage.addEventListener('click',() => closePopup(popupOpenImage));
+submitEditCardButton.addEventListener('click',() => closePopup(editPopup));
+submitNewCardButton.addEventListener('click',() => closePopup(addPopup));
+document.addEventListener('click',closePopupOverlay);
