@@ -7,6 +7,21 @@
   background-size: cover;
   background-position: center;
   margin: 0 29px 0 0;
+  position: relative;
+  cursor: pointer;
+}
+
+.profile__image:hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  background: rgba(0,0,0, 0.8);
 }
 
 @media screen and (max-width: 740px) {
@@ -19,4 +34,22 @@
   .profile__image {
     margin-right: 0;
   }
+}
+
+.profile__image-button {
+  display: none;
+    width: 26px;
+    height: 26px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-size: cover;
+    background-position: center;
+    background-color: transparent;
+    border: none;
+}
+
+.profile__image:hover .profile__image-button {
+  display: block;
 }

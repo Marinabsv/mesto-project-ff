@@ -1,11 +1,10 @@
 //Попап карточки
-import {clearValidation,nameInput,validateConfig} from "./index"
+//import {clearValidation,nameInput,validateConfig} from "./index"
 //import  {formElement} from "./validation"
 /////MODAL ////////////////
 function openPopup(element) {
   element.classList.add('popup_is-opened','popup_is-animated');
   document.addEventListener('keydown',closePopupEsc);
-  //clearValidation (nameInput, validateConfig);
   }
   
   function closePopup(element) {
